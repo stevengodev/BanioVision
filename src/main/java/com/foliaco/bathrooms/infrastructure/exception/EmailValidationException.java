@@ -1,4 +1,4 @@
-package com.foliaco.bathrooms.exception;
+package com.foliaco.bathrooms.infrastructure.exception;
 
 public class EmailValidationException extends RuntimeException{
     public EmailValidationException(){

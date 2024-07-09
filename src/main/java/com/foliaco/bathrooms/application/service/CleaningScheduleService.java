@@ -36,7 +36,8 @@ public class CleaningScheduleService implements CleaningScheduleUseCase {
         Optional<CleaningSchedule> foundCleaningSchedule = cleaningScheduleRepositoryPort
                 .findById(cleaningSchedule.getId());
 
-        return foundCleaningSchedule.isEmpty() ? Optional.empty()
+        return foundCleaningSchedule.isEmpty()
+                ? Optional.empty()
                 : Optional.of(cleaningScheduleRepositoryPort.save(cleaningSchedule));
     }
 

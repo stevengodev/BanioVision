@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface CleaningScheduleRepositoryPort {
 
     List<CleaningSchedule> getAll();
-    CleaningSchedule save(CleaningSchedule newCleaningSchedule);
+    CleaningSchedule save(CleaningSchedule cleaningSchedule);
     Optional<CleaningSchedule> findById(Integer id);
     List<CleaningSchedule> findByBathroomId(Integer bathroomId);
     List<CleaningSchedule> findByBathroomIdAndBetweenDateTimes(Integer bathroomId,
