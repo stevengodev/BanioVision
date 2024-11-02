@@ -1,6 +1,6 @@
 package com.foliaco.bathrooms.domain.ports.out;
 
-import com.foliaco.bathrooms.domain.model.MaintenanceSchedule;
+import com.foliaco.bathrooms.domain.dto.MaintenanceSchedule;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -1,16 +1,16 @@
 package com.foliaco.bathrooms.domain.ports.in;
 
-import com.foliaco.bathrooms.domain.model.Bathroom;
+import com.foliaco.bathrooms.domain.dto.BathroomDto;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface BathroomUseCase {
 
-    List<Bathroom> getAllBathrooms();
-    Bathroom createBathroom(Bathroom newBathroom);
-    Optional<Bathroom> updateBathroom(Bathroom bathroom);
-    Optional<Bathroom> getBathroomById(Integer id);
+    List<BathroomDto> getAllBathrooms();
+    BathroomDto createBathroom(BathroomDto newBathroom);
+    Optional<BathroomDto> updateBathroom(BathroomDto bathroom);
+    Optional<BathroomDto> getBathroomById(Integer id);
     boolean deleteBathroom(Integer id);
 
 }

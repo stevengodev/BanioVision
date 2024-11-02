@@ -1,7 +1,6 @@
 package com.foliaco.bathrooms.domain.ports.out;
 
-import com.foliaco.bathrooms.domain.model.CleaningSchedule;
-import com.foliaco.bathrooms.infrastructure.entity.CleaningScheduleEntity;
+import com.foliaco.bathrooms.domain.dto.CleaningScheduleDto;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -9,12 +8,12 @@ import java.util.Optional;
 
 public interface CleaningScheduleRepositoryPort {
 
-    List<CleaningSchedule> getAll();
-    CleaningSchedule save(CleaningSchedule cleaningSchedule);
-    Optional<CleaningSchedule> findById(Integer id);
-    List<CleaningSchedule> findByBathroomId(Integer bathroomId);
-    List<CleaningSchedule> findByBathroomIdAndBetweenDateTimes(Integer bathroomId,
-                                                               LocalDateTime start,
-                                                               LocalDateTime end);
+    List<CleaningScheduleDto> getAll();
+    CleaningScheduleDto save(CleaningScheduleDto cleaningSchedule);
+    Optional<CleaningScheduleDto> findById(Integer id);
+    List<CleaningScheduleDto> findByBathroomId(Integer bathroomId);
+    List<CleaningScheduleDto> findByBathroomIdAndBetweenDateTimes(Integer bathroomId,
+                                                                  LocalDateTime start,
+                                                                  LocalDateTime end);
     void delete(Integer id);
 }

@@ -1,7 +1,7 @@
 package com.foliaco.bathrooms.controller;
 
 import com.foliaco.bathrooms.application.service.CleaningScheduleService;
-import com.foliaco.bathrooms.domain.model.CleaningSchedule;
+import com.foliaco.bathrooms.domain.dto.CleaningScheduleDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,24 +20,24 @@ public class CleaningScheduleController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<CleaningSchedule>> getAll(){
+    public ResponseEntity<List<CleaningScheduleDto>> getAll(){
         return ResponseEntity.ok(cleaningScheduleService.getAllCleaningSchedules());
     }
 
     @GetMapping("/bathroom/{id}")
-    public ResponseEntity<List<CleaningSchedule>> getTodayCleaningSchedulesByBathroomId(@PathVariable Integer id){
+    public ResponseEntity<List<CleaningScheduleDto>> getTodayCleaningSchedulesByBathroomId(@PathVariable Integer id){
         return ResponseEntity.ok(cleaningScheduleService.getTodayCleaningSchedulesByBathroomId(id));
     }
 
     @PostMapping("/")
-    public ResponseEntity<CleaningSchedule> save(@RequestBody CleaningSchedule newCleaningSchedule){
+    public ResponseEntity<CleaningScheduleDto> save(@RequestBody CleaningScheduleDto newCleaningSchedule){
         return ResponseEntity.status(HttpStatus.CREATED).body(cleaningScheduleService.createCleaningSchedule(newCleaningSchedule));
     }
 
     @PutMapping("/")
-    public ResponseEntity<CleaningSchedule> update(@RequestBody CleaningSchedule cleaningSchedule){
+    public ResponseEntity<CleaningScheduleDto> update(@RequestBody CleaningScheduleDto cleaningSchedule){
 
-        Optional<CleaningSchedule> updateCleaningSchedule = cleaningScheduleService.updateCleaningSchedule(cleaningSchedule);
+        Optional<CleaningScheduleDto> updateCleaningSchedule = cleaningScheduleService.updateCleaningSchedule(cleaningSchedule);
 
         return updateCleaningSchedule.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.BAD_REQUEST)

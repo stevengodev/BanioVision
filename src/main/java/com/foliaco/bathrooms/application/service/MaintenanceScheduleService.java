@@ -1,6 +1,6 @@
 package com.foliaco.bathrooms.application.service;
 
-import com.foliaco.bathrooms.domain.model.MaintenanceSchedule;
+import com.foliaco.bathrooms.domain.dto.MaintenanceSchedule;
 import com.foliaco.bathrooms.domain.ports.in.MaintenanceScheduleUseCase;
 import com.foliaco.bathrooms.domain.ports.out.MaintenanceScheduleRepositoryPort;
 import org.springframework.beans.factory.annotation.Autowired;

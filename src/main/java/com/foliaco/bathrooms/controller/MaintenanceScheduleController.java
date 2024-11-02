@@ -1,7 +1,7 @@
 package com.foliaco.bathrooms.controller;
 
 import com.foliaco.bathrooms.application.service.MaintenanceScheduleService;
-import com.foliaco.bathrooms.domain.model.MaintenanceSchedule;
+import com.foliaco.bathrooms.domain.dto.MaintenanceSchedule;
 import com.foliaco.bathrooms.infrastructure.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

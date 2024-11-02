@@ -1,6 +1,6 @@
 package com.foliaco.bathrooms.infrastructure.adapter;
 
-import com.foliaco.bathrooms.domain.model.Bathroom;
+import com.foliaco.bathrooms.domain.dto.BathroomDto;
 import com.foliaco.bathrooms.domain.ports.out.BathroomRepositoryPort;
 import com.foliaco.bathrooms.infrastructure.entity.BathroomEntity;
 import com.foliaco.bathrooms.infrastructure.mapper.IBathroomMapper;
@@ -26,18 +26,18 @@ public class BathroomRepositoryAdapter implements BathroomRepositoryPort {
     }
 
     @Override
-    public List<Bathroom> getAll() {
+    public List<BathroomDto> getAll() {
         return bathroomMapper.toBathrooms( bathroomRepository.findAll() );
     }
 
     @Override
-    public Bathroom save(Bathroom bathroom) {
+    public BathroomDto save(BathroomDto bathroom) {
         BathroomEntity bathroomEntity = bathroomMapper.toBathroomEntity(bathroom);
         return bathroomMapper.toBathroom(bathroomRepository.save(bathroomEntity));
     }
 
     @Override
-    public Optional<Bathroom> findById(Integer id) {
+    public Optional<BathroomDto> findById(Integer id) {
         return bathroomRepository.findById(id).
                 map(bathroomMapper::toBathroom);
     }

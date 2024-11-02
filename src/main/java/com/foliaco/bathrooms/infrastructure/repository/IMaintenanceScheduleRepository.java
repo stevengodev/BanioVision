@@ -1,6 +1,5 @@
 package com.foliaco.bathrooms.infrastructure.repository;
 
-import com.foliaco.bathrooms.domain.model.MaintenanceSchedule;
 import com.foliaco.bathrooms.infrastructure.entity.MaintenanceScheduleEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

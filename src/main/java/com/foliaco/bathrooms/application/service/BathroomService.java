@@ -1,12 +1,11 @@
 package com.foliaco.bathrooms.application.service;
 
-import com.foliaco.bathrooms.domain.model.Bathroom;
+import com.foliaco.bathrooms.domain.dto.BathroomDto;
 import com.foliaco.bathrooms.domain.ports.in.BathroomUseCase;
 import com.foliaco.bathrooms.domain.ports.out.BathroomRepositoryPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,23 +21,23 @@ public class BathroomService implements BathroomUseCase {
     }
 
     @Override
-    public List<Bathroom> getAllBathrooms() {
+    public List<BathroomDto> getAllBathrooms() {
         return bathroomRepositoryPort.getAll();
     }
 
     @Override
-    public Bathroom createBathroom(Bathroom newBathroom) {
+    public BathroomDto createBathroom(BathroomDto newBathroom) {
         return bathroomRepositoryPort.save(newBathroom);
     }
 
     @Override
-    public Optional<Bathroom> updateBathroom(Bathroom bathroom) {
-        Optional<Bathroom> foundBathroom = bathroomRepositoryPort.findById(bathroom.getId());
+    public Optional<BathroomDto> updateBathroom(BathroomDto bathroom) {
+        Optional<BathroomDto> foundBathroom = bathroomRepositoryPort.findById(bathroom.getId());
         return foundBathroom.isEmpty() ? Optional.empty() : Optional.of(bathroomRepositoryPort.save(bathroom));
     }
 
     @Override
-    public Optional<Bathroom> getBathroomById(Integer id) {
+    public Optional<BathroomDto> getBathroomById(Integer id) {
         return bathroomRepositoryPort.findById(id);
     }
 

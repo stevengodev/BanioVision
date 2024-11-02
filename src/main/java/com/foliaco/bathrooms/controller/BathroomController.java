@@ -1,7 +1,7 @@
 package com.foliaco.bathrooms.controller;
 
 import com.foliaco.bathrooms.application.service.BathroomService;
-import com.foliaco.bathrooms.domain.model.Bathroom;
+import com.foliaco.bathrooms.domain.dto.BathroomDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -22,14 +22,14 @@ public class BathroomController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<Bathroom>> getAll(){
+    public ResponseEntity<List<BathroomDto>> getAll(){
         return ResponseEntity.ok(bathroomService.getAllBathrooms());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Bathroom> getById(@PathVariable("id") Integer id ) {
+    public ResponseEntity<BathroomDto> getById(@PathVariable("id") Integer id ) {
 
-        Optional<Bathroom> bathroom = bathroomService.getBathroomById(id);
+        Optional<BathroomDto> bathroom = bathroomService.getBathroomById(id);
 
         return bathroom.map(ResponseEntity::ok).
                 orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -37,14 +37,14 @@ public class BathroomController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Bathroom> save(@RequestBody Bathroom newBathroom){
+    public ResponseEntity<BathroomDto> save(@RequestBody BathroomDto newBathroom){
         return ResponseEntity.status(HttpStatus.CREATED).body(bathroomService.createBathroom(newBathroom));
     }
 
     @PutMapping("/")
-    public ResponseEntity<Bathroom> update(@RequestBody Bathroom bathroom){
+    public ResponseEntity<BathroomDto> update(@RequestBody BathroomDto bathroom){
 
-        Optional<Bathroom> updatedBathroom = bathroomService.updateBathroom(bathroom);
+        Optional<BathroomDto> updatedBathroom = bathroomService.updateBathroom(bathroom);
 
         return updatedBathroom.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.BAD_REQUEST).build());

@@ -1,4 +1,4 @@
-package com.foliaco.bathrooms.domain.model;
+package com.foliaco.bathrooms.domain.dto;
 
 import com.foliaco.bathrooms.domain.enums.BathroomStatus;
 import com.foliaco.bathrooms.domain.enums.Gender;
@@ -9,7 +9,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Bathroom {
+public class BathroomDto {
     private Integer id;
     private Gender gender;
     private Integer blockId;

@@ -1,6 +1,6 @@
 package com.foliaco.bathrooms.application.service;
 
-import com.foliaco.bathrooms.domain.model.CleaningSchedule;
+import com.foliaco.bathrooms.domain.dto.CleaningScheduleDto;
 import com.foliaco.bathrooms.domain.ports.in.CleaningScheduleUseCase;
 import com.foliaco.bathrooms.domain.ports.out.CleaningScheduleRepositoryPort;
 import com.foliaco.bathrooms.infrastructure.adapter.CleaningScheduleRepositoryAdapter;
@@ -22,18 +22,18 @@ public class CleaningScheduleService implements CleaningScheduleUseCase {
         this.cleaningScheduleRepositoryPort = cleaningScheduleRepositoryPort;
     }
     @Override
-    public List<CleaningSchedule> getAllCleaningSchedules() {
+    public List<CleaningScheduleDto> getAllCleaningSchedules() {
         return cleaningScheduleRepositoryPort.getAll();
     }
 
     @Override
-    public CleaningSchedule createCleaningSchedule(CleaningSchedule newCleaningSchedule) {
+    public CleaningScheduleDto createCleaningSchedule(CleaningScheduleDto newCleaningSchedule) {
         return cleaningScheduleRepositoryPort.save(newCleaningSchedule);
     }
 
     @Override
-    public Optional<CleaningSchedule> updateCleaningSchedule(CleaningSchedule cleaningSchedule) {
-        Optional<CleaningSchedule> foundCleaningSchedule = cleaningScheduleRepositoryPort
+    public Optional<CleaningScheduleDto> updateCleaningSchedule(CleaningScheduleDto cleaningSchedule) {
+        Optional<CleaningScheduleDto> foundCleaningSchedule = cleaningScheduleRepositoryPort
                 .findById(cleaningSchedule.getId());
 
         return foundCleaningSchedule.isEmpty()
@@ -43,7 +43,7 @@ public class CleaningScheduleService implements CleaningScheduleUseCase {
 
 
     @Override
-    public List<CleaningSchedule> getTodayCleaningSchedulesByBathroomId(Integer bathroomId) {
+    public List<CleaningScheduleDto> getTodayCleaningSchedulesByBathroomId(Integer bathroomId) {
         LocalDateTime startOfDay = LocalDateTime.now().with(LocalTime.MIN);
         LocalDateTime endOfDay = LocalDateTime.now().with(LocalTime.MAX);
         return cleaningScheduleRepositoryPort.findByBathroomIdAndBetweenDateTimes(bathroomId, startOfDay, endOfDay);

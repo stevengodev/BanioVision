@@ -1,6 +1,6 @@
 package com.foliaco.bathrooms.infrastructure.mapper;
 
-import com.foliaco.bathrooms.domain.model.CleaningSchedule;
+import com.foliaco.bathrooms.domain.dto.CleaningScheduleDto;
 import com.foliaco.bathrooms.infrastructure.entity.CleaningScheduleEntity;
 import org.mapstruct.*;
 
@@ -15,12 +15,12 @@ public interface ICleaningScheduleMapper {
             @Mapping(source = "endDateTime", target = "endDateTime"),
             @Mapping(source = "bathroomId", target = "bathroomId"),
     })
-    CleaningSchedule toCleaningSchedule(CleaningScheduleEntity cleaningScheduleEntity);
+    CleaningScheduleDto toCleaningSchedule(CleaningScheduleEntity cleaningScheduleEntity);
 
     @InheritInverseConfiguration
     @Mapping(target = "bathroomEntity", ignore = true)
-    CleaningScheduleEntity toCleaningScheduleEntity(CleaningSchedule cleaningSchedule);
+    CleaningScheduleEntity toCleaningScheduleEntity(CleaningScheduleDto cleaningSchedule);
 
-    List<CleaningSchedule> toCleaningScheduleList(List<CleaningScheduleEntity> cleaningScheduleEntities);
+    List<CleaningScheduleDto> toCleaningScheduleList(List<CleaningScheduleEntity> cleaningScheduleEntities);
 
 }

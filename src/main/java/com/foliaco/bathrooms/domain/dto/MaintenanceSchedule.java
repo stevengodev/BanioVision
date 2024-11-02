@@ -1,4 +1,4 @@
-package com.foliaco.bathrooms.domain.model;
+package com.foliaco.bathrooms.domain.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +9,8 @@ import java.time.LocalDateTime;
 @Setter
 @Getter
 @ToString
-public class CleaningSchedule {
+public class MaintenanceSchedule {
+
     private Integer id;
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;

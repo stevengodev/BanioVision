@@ -1,16 +1,16 @@
 package com.foliaco.bathrooms.domain.ports.in;
 
-import com.foliaco.bathrooms.domain.model.Block;
+import com.foliaco.bathrooms.domain.dto.BlockDto;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface BlockUseCase {
 
-    List<Block> getAllBlocks();
-    Block createBlock(Block newBlock);
-    Optional<Block> updateBlock(Block block);
-    Optional<Block> findBlockById(Integer id);
-    Optional<Block> findBlockByName(String blockName);
+    List<BlockDto> getAllBlocks();
+    BlockDto createBlock(BlockDto newBlock);
+    Optional<BlockDto> updateBlock(BlockDto block);
+    Optional<BlockDto> findBlockById(Integer id);
+    Optional<BlockDto> findBlockByName(String blockName);
     boolean deleteBlock(Integer id);
 }

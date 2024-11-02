@@ -1,7 +1,7 @@
 package com.foliaco.bathrooms.controller;
 
 import com.foliaco.bathrooms.application.service.BlockService;
-import com.foliaco.bathrooms.domain.model.Block;
+import com.foliaco.bathrooms.domain.dto.BlockDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -23,19 +23,19 @@ public class BlockController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<Block>> getAll(){
+    public ResponseEntity<List<BlockDto>> getAll(){
         return ResponseEntity.ok(blockService.getAllBlocks());
     }
 
     @PostMapping("/")
-    public ResponseEntity<Block> save(@RequestBody Block newBlock){
+    public ResponseEntity<BlockDto> save(@RequestBody BlockDto newBlock){
         return ResponseEntity.status(HttpStatus.CREATED).body(blockService.createBlock(newBlock));
     }
 
     @PutMapping("/")
-    public ResponseEntity<Block> update(@RequestBody Block block){
+    public ResponseEntity<BlockDto> update(@RequestBody BlockDto block){
 
-        Optional<Block> updatedBlock = blockService.updateBlock(block);
+        Optional<BlockDto> updatedBlock = blockService.updateBlock(block);
 
         return updatedBlock.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -48,9 +48,9 @@ public class BlockController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     @GetMapping("/name/{name}")
-    public ResponseEntity<Block> findBlockByName(@PathVariable("name") String name){
+    public ResponseEntity<BlockDto> findBlockByName(@PathVariable("name") String name){
 
-        Optional<Block> foundBlock = blockService.findBlockByName(name);
+        Optional<BlockDto> foundBlock = blockService.findBlockByName(name);
         return foundBlock.map(block -> ResponseEntity.status(HttpStatus.OK).body(block)).
                 orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 

@@ -1,6 +1,6 @@
 package com.foliaco.bathrooms.infrastructure.adapter;
 
-import com.foliaco.bathrooms.domain.model.CleaningSchedule;
+import com.foliaco.bathrooms.domain.dto.CleaningScheduleDto;
 import com.foliaco.bathrooms.domain.ports.out.CleaningScheduleRepositoryPort;
 import com.foliaco.bathrooms.infrastructure.entity.CleaningScheduleEntity;
 import com.foliaco.bathrooms.infrastructure.mapper.ICleaningScheduleMapper;
@@ -27,12 +27,12 @@ public class CleaningScheduleRepositoryAdapter implements CleaningScheduleReposi
 
 
     @Override
-    public List<CleaningSchedule> getAll() {
+    public List<CleaningScheduleDto> getAll() {
         return cleaningScheduleMapper.toCleaningScheduleList(cleaningScheduleRepository.findAll());
     }
 
     @Override
-    public CleaningSchedule save(CleaningSchedule newCleaningSchedule) {
+    public CleaningScheduleDto save(CleaningScheduleDto newCleaningSchedule) {
         CleaningScheduleEntity cleaningScheduleEntity = cleaningScheduleMapper
                                                         .toCleaningScheduleEntity(newCleaningSchedule);
         return cleaningScheduleMapper.toCleaningSchedule(cleaningScheduleRepository
@@ -40,20 +40,20 @@ public class CleaningScheduleRepositoryAdapter implements CleaningScheduleReposi
     }
 
     @Override
-    public Optional<CleaningSchedule> findById(Integer id) {
+    public Optional<CleaningScheduleDto> findById(Integer id) {
         return cleaningScheduleRepository.findById(id)
                 .map(cleaningScheduleMapper::toCleaningSchedule);
     }
 
     @Override
-    public List<CleaningSchedule> findByBathroomId(Integer bathroomId) {
+    public List<CleaningScheduleDto> findByBathroomId(Integer bathroomId) {
         return cleaningScheduleMapper.toCleaningScheduleList(
                 cleaningScheduleRepository.findByBathroomId(bathroomId)
         );
     }
 
     @Override
-    public List<CleaningSchedule> findByBathroomIdAndBetweenDateTimes(Integer bathroomId, LocalDateTime start, LocalDateTime end) {
+    public List<CleaningScheduleDto> findByBathroomIdAndBetweenDateTimes(Integer bathroomId, LocalDateTime start, LocalDateTime end) {
         return cleaningScheduleMapper.toCleaningScheduleList(
                 cleaningScheduleRepository.findByBathroomIdAndBetweenDateTimes(bathroomId, start, end)
         );

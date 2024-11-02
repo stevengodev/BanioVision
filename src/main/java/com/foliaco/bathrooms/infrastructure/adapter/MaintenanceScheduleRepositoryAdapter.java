@@ -1,6 +1,6 @@
 package com.foliaco.bathrooms.infrastructure.adapter;
 
-import com.foliaco.bathrooms.domain.model.MaintenanceSchedule;
+import com.foliaco.bathrooms.domain.dto.MaintenanceSchedule;
 import com.foliaco.bathrooms.domain.ports.out.MaintenanceScheduleRepositoryPort;
 import com.foliaco.bathrooms.infrastructure.entity.MaintenanceScheduleEntity;
 import com.foliaco.bathrooms.infrastructure.mapper.IMaintenanceScheduleMapper;

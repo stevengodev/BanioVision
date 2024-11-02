@@ -1,6 +1,6 @@
 package com.foliaco.bathrooms.application.service;
 
-import com.foliaco.bathrooms.domain.model.Block;
+import com.foliaco.bathrooms.domain.dto.BlockDto;
 import com.foliaco.bathrooms.domain.ports.in.BlockUseCase;
 import com.foliaco.bathrooms.domain.ports.out.BlockRepositoryPort;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,32 +23,32 @@ public class BlockService implements BlockUseCase {
 
     @Transactional(readOnly = true)
     @Override
-    public List<Block> getAllBlocks() {
+    public List<BlockDto> getAllBlocks() {
         return blockRepositoryPort.getAll();
     }
 
     @Transactional
     @Override
-    public Block createBlock(Block newBlock) {
+    public BlockDto createBlock(BlockDto newBlock) {
         return blockRepositoryPort.save(newBlock);
     }
 
     @Transactional
     @Override
-    public Optional<Block> updateBlock(Block block) {
-        Optional<Block> foundBlock = blockRepositoryPort.findById(block.getId());
+    public Optional<BlockDto> updateBlock(BlockDto block) {
+        Optional<BlockDto> foundBlock = blockRepositoryPort.findById(block.getId());
         return foundBlock.isEmpty() ? Optional.empty() : Optional.of(blockRepositoryPort.save(block));
     }
 
     @Transactional(readOnly = true)
     @Override
-    public Optional<Block> findBlockById(Integer id) {
+    public Optional<BlockDto> findBlockById(Integer id) {
         return blockRepositoryPort.findById(id);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public Optional<Block> findBlockByName(String blockName) {
+    public Optional<BlockDto> findBlockByName(String blockName) {
         return blockRepositoryPort.findByName(blockName);
     }
 

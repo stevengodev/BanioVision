@@ -1,6 +1,6 @@
 package com.foliaco.bathrooms.domain.ports.in;
 
-import com.foliaco.bathrooms.domain.model.MaintenanceSchedule;
+import com.foliaco.bathrooms.domain.dto.MaintenanceSchedule;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,6 +1,6 @@
 package com.foliaco.bathrooms.infrastructure.mapper;
 
-import com.foliaco.bathrooms.domain.model.Bathroom;
+import com.foliaco.bathrooms.domain.dto.BathroomDto;
 import com.foliaco.bathrooms.infrastructure.entity.BathroomEntity;
 import org.mapstruct.*;
 
@@ -16,12 +16,12 @@ public interface IBathroomMapper {
             @Mapping(source = "blockId", target = "blockId"),
             @Mapping(source = "floor", target = "floor")
     })
-    Bathroom toBathroom(BathroomEntity bathroomEntity);
+    BathroomDto toBathroom(BathroomEntity bathroomEntity);
 
     @InheritInverseConfiguration
     @Mapping(target = "blockEntity", ignore = true)
     @Mapping(target = "cleaningScheduleEntities", ignore = true)
-    BathroomEntity toBathroomEntity(Bathroom bathroom);
+    BathroomEntity toBathroomEntity(BathroomDto bathroom);
 
-    List<Bathroom> toBathrooms(List<BathroomEntity> bathroomEntities);
+    List<BathroomDto> toBathrooms(List<BathroomEntity> bathroomEntities);
 }

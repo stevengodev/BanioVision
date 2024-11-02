@@ -1,7 +1,6 @@
 package com.foliaco.bathrooms.infrastructure.mapper;
 
-import com.foliaco.bathrooms.domain.model.MaintenanceSchedule;
-import com.foliaco.bathrooms.infrastructure.entity.CleaningScheduleEntity;
+import com.foliaco.bathrooms.domain.dto.MaintenanceSchedule;
 import com.foliaco.bathrooms.infrastructure.entity.MaintenanceScheduleEntity;
 import org.mapstruct.*;
 
