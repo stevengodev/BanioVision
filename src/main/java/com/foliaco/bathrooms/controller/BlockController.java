@@ -2,6 +2,7 @@ package com.foliaco.bathrooms.controller;
 
 import com.foliaco.bathrooms.application.service.BlockService;
 import com.foliaco.bathrooms.domain.dto.BlockDto;
+import com.foliaco.bathrooms.domain.dto.BlockRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class BlockController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<BlockDto> save(@RequestBody BlockDto newBlock){
+    public ResponseEntity<BlockDto> save(@RequestBody BlockRequestDto newBlock){
         return ResponseEntity.status(HttpStatus.CREATED).body(blockService.createBlock(newBlock));
     }
 

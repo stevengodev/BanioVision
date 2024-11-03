@@ -1,6 +1,7 @@
 package com.foliaco.bathrooms.infrastructure.mapper;
 
 import com.foliaco.bathrooms.domain.dto.BlockDto;
+import com.foliaco.bathrooms.domain.dto.BlockRequestDto;
 import com.foliaco.bathrooms.infrastructure.entity.BlockEntity;
 import org.mapstruct.*;
 
@@ -13,10 +14,13 @@ public interface IBlockMapper {
             @Mapping(source = "numberOfFloors", target = "numberOfFloors")
     })
     BlockDto toBlock(BlockEntity blockEntity);
+
     @InheritInverseConfiguration
     @Mapping(target = "bathroomEntities", ignore = true)
     BlockEntity toBlockEntity(BlockDto block);
+
     List<BlockDto> toBlockList(List<BlockEntity> blockEntityList);
+
     List<BlockEntity> toBlockEntityList(List<BlockDto> blockList);
 
 }

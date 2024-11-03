@@ -1,17 +1,19 @@
 package com.foliaco.bathrooms.application.service;
 
 import com.foliaco.bathrooms.domain.dto.BlockDto;
+import com.foliaco.bathrooms.domain.dto.BlockRequestDto;
 import com.foliaco.bathrooms.domain.ports.in.BlockUseCase;
 import com.foliaco.bathrooms.domain.ports.out.BlockRepositoryPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cglib.core.Block;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Service("blockService")
 public class BlockService implements BlockUseCase {
 
     private final BlockRepositoryPort blockRepositoryPort;
@@ -29,8 +31,11 @@ public class BlockService implements BlockUseCase {
 
     @Transactional
     @Override
-    public BlockDto createBlock(BlockDto newBlock) {
-        return blockRepositoryPort.save(newBlock);
+    public BlockDto createBlock(BlockRequestDto newBlock) {
+        BlockDto blockDto = new BlockDto();
+        blockDto.setName(newBlock.getName());
+        blockDto.setNumberOfFloors(newBlock.getNumberOfFloors());
+        return blockRepositoryPort.save( blockDto );
     }
 
     @Transactional
