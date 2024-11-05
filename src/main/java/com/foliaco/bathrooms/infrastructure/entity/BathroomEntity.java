@@ -2,11 +2,14 @@ package com.foliaco.bathrooms.infrastructure.entity;
 
 import com.foliaco.bathrooms.domain.enums.BathroomStatus;
 import com.foliaco.bathrooms.domain.enums.Gender;
+import com.foliaco.bathrooms.infrastructure.annotations.AuditedEntityName;
+import com.foliaco.bathrooms.infrastructure.listeners.CustomAuditListener;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.beans.Visibility;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +18,8 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+@EntityListeners(CustomAuditListener.class)
+@AuditedEntityName("Banos")
 public class BathroomEntity {
 
     @Id

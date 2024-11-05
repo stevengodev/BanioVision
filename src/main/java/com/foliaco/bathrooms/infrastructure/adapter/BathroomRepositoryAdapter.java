@@ -6,7 +6,6 @@ import com.foliaco.bathrooms.infrastructure.entity.BathroomEntity;
 import com.foliaco.bathrooms.infrastructure.mapper.IBathroomMapper;
 import com.foliaco.bathrooms.infrastructure.repository.IBathroomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,8 +18,8 @@ public class BathroomRepositoryAdapter implements BathroomRepositoryPort {
     private final IBathroomMapper bathroomMapper;
 
     @Autowired
-    public BathroomRepositoryAdapter(@Qualifier("IBathroomRepository") IBathroomRepository bathroomRepository,
-                                     @Qualifier("IBathroomMapperImpl") IBathroomMapper bathroomMapper) {
+    public BathroomRepositoryAdapter(IBathroomRepository bathroomRepository,
+                                     IBathroomMapper bathroomMapper) {
         this.bathroomRepository = bathroomRepository;
         this.bathroomMapper = bathroomMapper;
     }

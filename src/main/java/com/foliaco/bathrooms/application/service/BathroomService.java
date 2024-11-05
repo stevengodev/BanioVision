@@ -16,7 +16,7 @@ public class BathroomService implements BathroomUseCase {
     private final BathroomRepositoryPort bathroomRepositoryPort;
 
     @Autowired
-    public BathroomService( @Qualifier("bathroomRepositoryAdapter") BathroomRepositoryPort bathroomRepositoryPort) {
+    public BathroomService(BathroomRepositoryPort bathroomRepositoryPort) {
         this.bathroomRepositoryPort = bathroomRepositoryPort;
     }
 
