@@ -6,6 +6,7 @@ import lombok.*;
 @Getter
 @ToString
 @NoArgsConstructor
+@AllArgsConstructor
 public class BlockDto {
     private Integer id;
     private String name;
