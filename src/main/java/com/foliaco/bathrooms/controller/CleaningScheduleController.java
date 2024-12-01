@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,9 +23,16 @@ public class CleaningScheduleController {
         return ResponseEntity.ok(cleaningScheduleUseCase.getAllCleaningSchedules());
     }
 
+    @GetMapping("/upcoming")
+    public ResponseEntity<List<CleaningScheduleDto>> getAllUpcoming(){
+        LocalDateTime now = LocalDateTime.now();
+        return ResponseEntity.ok(cleaningScheduleUseCase.getCleaningSchedulesFromDate(now));
+    }
+
     @GetMapping("/bathroom/{id}")
-    public ResponseEntity<List<CleaningScheduleDto>> getTodayCleaningSchedulesByBathroomId(@PathVariable Integer id){
-        return ResponseEntity.ok(cleaningScheduleUseCase.getTodayCleaningSchedulesByBathroomId(id));
+    public ResponseEntity<List<CleaningScheduleDto>> getCleaningSchedulesByBathroomIdFromDate(@PathVariable Integer id){
+        LocalDateTime now = LocalDateTime.now();
+        return ResponseEntity.ok(cleaningScheduleUseCase.getCleaningSchedulesByBathroomIdFromDate(id, now));
     }
 
     @PostMapping("/")

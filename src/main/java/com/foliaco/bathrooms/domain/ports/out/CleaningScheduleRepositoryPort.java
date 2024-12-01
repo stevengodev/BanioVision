@@ -12,8 +12,10 @@ public interface CleaningScheduleRepositoryPort {
     CleaningScheduleDto save(CleaningScheduleDto cleaningSchedule);
     Optional<CleaningScheduleDto> findById(Integer id);
     List<CleaningScheduleDto> findByBathroomId(Integer bathroomId);
-    List<CleaningScheduleDto> findByBathroomIdAndBetweenDateTimes(Integer bathroomId,
-                                                                  LocalDateTime start,
-                                                                  LocalDateTime end);
+
     void delete(Integer id);
+
+    List<CleaningScheduleDto> findByBathroomIdAndStartDateTimeAfter(Integer bathroomId,
+                                                                      LocalDateTime start);
+    List<CleaningScheduleDto> findAllByStartDateTimeAfter(LocalDateTime start);
 }

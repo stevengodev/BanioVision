@@ -10,7 +10,7 @@ public interface MaintenanceScheduleRepositoryPort {
     List<MaintenanceScheduleDto> getAll();
     MaintenanceScheduleDto save(MaintenanceScheduleDto maintenanceSchedule);
     Optional<MaintenanceScheduleDto> findById(Integer id);
-    List<MaintenanceScheduleDto> findByBathroomIdByStartDateTimeAfter(Integer bathroomId,
+    List<MaintenanceScheduleDto> findByBathroomIdAndStartDateTimeAfter(Integer bathroomId,
                                                                      LocalDateTime start);
     List<MaintenanceScheduleDto> findAllByStartDateTimeAfter(LocalDateTime start);
     void delete(Integer id);

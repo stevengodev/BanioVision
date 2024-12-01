@@ -12,7 +12,7 @@ public interface MaintenanceScheduleUseCase {
     List<MaintenanceScheduleDto> getAllMaintenanceSchedules();
     MaintenanceScheduleDto createMaintenanceSchedule(MaintenanceScheduleDto newCleaningSchedule);
     Optional<MaintenanceScheduleDto> updateMaintenanceSchedule(MaintenanceScheduleDto cleaningSchedule);
-    List<MaintenanceScheduleDto> getMaintenanceSchedulesByBathroomIdFromDate(Integer bathroomId, LocalDateTime datetime);
+    List<MaintenanceScheduleDto> getMaintenanceSchedulesByBathroomIdAndFromDate(Integer bathroomId, LocalDateTime datetime);
     List<MaintenanceScheduleDto> getMaintenanceSchedulesFromDate(LocalDateTime date);
     boolean deleteMaintenanceSchedule(Integer id);
 

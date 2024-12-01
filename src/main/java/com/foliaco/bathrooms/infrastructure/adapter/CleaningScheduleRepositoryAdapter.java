@@ -53,14 +53,21 @@ public class CleaningScheduleRepositoryAdapter implements CleaningScheduleReposi
     }
 
     @Override
-    public List<CleaningScheduleDto> findByBathroomIdAndBetweenDateTimes(Integer bathroomId, LocalDateTime start, LocalDateTime end) {
+    public void delete(Integer id) {
+        cleaningScheduleRepository.deleteById(id);
+    }
+
+    @Override
+    public List<CleaningScheduleDto> findByBathroomIdAndStartDateTimeAfter(Integer bathroomId, LocalDateTime start) {
         return cleaningScheduleMapper.toCleaningScheduleList(
-                cleaningScheduleRepository.findByBathroomIdAndBetweenDateTimes(bathroomId, start, end)
+                cleaningScheduleRepository.findByBathroomIdAndStartDateTimeAfter(bathroomId, start)
         );
     }
 
     @Override
-    public void delete(Integer id) {
-        cleaningScheduleRepository.deleteById(id);
+    public List<CleaningScheduleDto> findAllByStartDateTimeAfter(LocalDateTime start) {
+        return cleaningScheduleMapper.toCleaningScheduleList(
+                cleaningScheduleRepository.findMaintenanceScheduleEntitiesByStartDateTimeAfter(start)
+        );
     }
 }

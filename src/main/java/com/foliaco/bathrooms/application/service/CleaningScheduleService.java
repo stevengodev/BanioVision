@@ -39,14 +39,15 @@ public class CleaningScheduleService implements CleaningScheduleUseCase {
                 : Optional.of(cleaningScheduleRepositoryPort.save(cleaningSchedule));
     }
 
-
     @Override
-    public List<CleaningScheduleDto> getTodayCleaningSchedulesByBathroomId(Integer bathroomId) {
-        LocalDateTime startOfDay = LocalDateTime.now().with(LocalTime.MIN);
-        LocalDateTime endOfDay = LocalDateTime.now().with(LocalTime.MAX);
-        return cleaningScheduleRepositoryPort.findByBathroomIdAndBetweenDateTimes(bathroomId, startOfDay, endOfDay);
+    public List<CleaningScheduleDto> getCleaningSchedulesByBathroomIdFromDate(Integer bathroomId, LocalDateTime datetime) {
+        return cleaningScheduleRepositoryPort.findByBathroomIdAndStartDateTimeAfter(bathroomId, datetime);
     }
 
+    @Override
+    public List<CleaningScheduleDto> getCleaningSchedulesFromDate(LocalDateTime date) {
+        return cleaningScheduleRepositoryPort.findAllByStartDateTimeAfter(date);
+    }
 
     @Override
     public boolean deleteCleaningSchedule(Integer id) {

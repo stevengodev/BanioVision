@@ -1,6 +1,7 @@
 package com.foliaco.bathrooms.infrastructure.repository;
 
 import com.foliaco.bathrooms.infrastructure.entity.CleaningScheduleEntity;
+import com.foliaco.bathrooms.infrastructure.entity.MaintenanceScheduleEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,10 +14,9 @@ public interface ICleaningScheduleRepository extends JpaRepository<CleaningSched
     @Query("SELECT cs FROM CleaningScheduleEntity cs WHERE cs.bathroomId = :bathroomId")
     List<CleaningScheduleEntity> findByBathroomId(Integer bathroomId);
 
-    @Query("SELECT cs FROM CleaningScheduleEntity cs WHERE cs.bathroomId = :banoId " +
-            "AND cs.startDateTime BETWEEN :startOfDay AND :endOfDay")
-    List<CleaningScheduleEntity> findByBathroomIdAndBetweenDateTimes(@Param("banoId") Integer banoId,
-                                                       @Param("startOfDay") LocalDateTime startOfDay,
-                                                       @Param("endOfDay") LocalDateTime endOfDay);
+    List<CleaningScheduleEntity> findByBathroomIdAndStartDateTimeAfter(Integer id, LocalDateTime date);
+
+    List<CleaningScheduleEntity> findMaintenanceScheduleEntitiesByStartDateTimeAfter(LocalDateTime startOfDay);
+
 
 }

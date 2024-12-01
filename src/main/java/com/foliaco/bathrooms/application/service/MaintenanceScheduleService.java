@@ -41,8 +41,8 @@ public class MaintenanceScheduleService implements MaintenanceScheduleUseCase {
     }
 
     @Override
-    public List<MaintenanceScheduleDto> getMaintenanceSchedulesByBathroomIdFromDate(Integer bathroomId, LocalDateTime datetime) {
-        return maintenanceScheduleRepositoryPort.findByBathroomIdByStartDateTimeAfter(bathroomId, datetime);
+    public List<MaintenanceScheduleDto> getMaintenanceSchedulesByBathroomIdAndFromDate(Integer bathroomId, LocalDateTime datetime) {
+        return maintenanceScheduleRepositoryPort.findByBathroomIdAndStartDateTimeAfter(bathroomId, datetime);
     }
 
     @Override

@@ -47,7 +47,7 @@ public class MaintenanceScheduleRepositoryAdapter implements MaintenanceSchedule
     }
 
     @Override
-    public List<MaintenanceScheduleDto> findByBathroomIdByStartDateTimeAfter(Integer bathroomId,
+    public List<MaintenanceScheduleDto> findByBathroomIdAndStartDateTimeAfter(Integer bathroomId,
                                                                             LocalDateTime start) {
 
         return maintenanceScheduleMapper.toMaintenanceScheduleList(

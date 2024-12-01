@@ -33,7 +33,7 @@ public class MaintenanceScheduleController {
     @GetMapping("/bathroom/{id}")
     public ResponseEntity<List<MaintenanceScheduleDto>> getMaintenanceSchedulesByBathroomIdFromDate(@PathVariable Integer id){
         LocalDateTime now = LocalDateTime.now();
-        List<MaintenanceScheduleDto> maintenanceSchedules = maintenanceScheduleUseCase.getMaintenanceSchedulesByBathroomIdFromDate(id, now);
+        List<MaintenanceScheduleDto> maintenanceSchedules = maintenanceScheduleUseCase.getMaintenanceSchedulesByBathroomIdAndFromDate(id, now);
         return ResponseEntity.ok(maintenanceSchedules);
     }
 
