@@ -1,6 +1,7 @@
 package com.foliaco.bathrooms.application.service;
 
 import com.foliaco.bathrooms.domain.dto.BathroomDto;
+import com.foliaco.bathrooms.domain.dto.BathroomIncidentDto;
 import com.foliaco.bathrooms.domain.ports.in.BathroomUseCase;
 import com.foliaco.bathrooms.domain.ports.out.BathroomRepositoryPort;
 import org.springframework.beans.factory.annotation.Autowired;

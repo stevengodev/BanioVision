@@ -3,6 +3,8 @@ package com.foliaco.bathrooms.controller;
 import com.foliaco.bathrooms.application.service.BlockService;
 import com.foliaco.bathrooms.domain.dto.BlockDto;
 import com.foliaco.bathrooms.domain.dto.BlockRequestDto;
+import com.foliaco.bathrooms.domain.ports.in.BlockUseCase;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -14,29 +16,25 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/blocks")
+@AllArgsConstructor
 public class BlockController {
 
-    private final BlockService blockService;
-
-    @Autowired
-    public BlockController(@Qualifier("blockService") BlockService blockService) {
-        this.blockService = blockService;
-    }
+    private final BlockUseCase blockUseCase;
 
     @GetMapping("/")
     public ResponseEntity<List<BlockDto>> getAll(){
-        return ResponseEntity.ok(blockService.getAllBlocks());
+        return ResponseEntity.ok(blockUseCase.getAllBlocks());
     }
 
     @PostMapping("/")
     public ResponseEntity<BlockDto> save(@RequestBody BlockRequestDto newBlock){
-        return ResponseEntity.status(HttpStatus.CREATED).body(blockService.createBlock(newBlock));
+        return ResponseEntity.status(HttpStatus.CREATED).body(blockUseCase.createBlock(newBlock));
     }
 
     @PutMapping("/")
     public ResponseEntity<BlockDto> update(@RequestBody BlockDto block){
 
-        Optional<BlockDto> updatedBlock = blockService.updateBlock(block);
+        Optional<BlockDto> updatedBlock = blockUseCase.updateBlock(block);
 
         return updatedBlock.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -45,13 +43,13 @@ public class BlockController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable Integer id){
-        return blockService.deleteBlock(id) ? new ResponseEntity<>(HttpStatus.OK)
+        return blockUseCase.deleteBlock(id) ? new ResponseEntity<>(HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     @GetMapping("/name/{name}")
     public ResponseEntity<BlockDto> findBlockByName(@PathVariable("name") String name){
 
-        Optional<BlockDto> foundBlock = blockService.findBlockByName(name);
+        Optional<BlockDto> foundBlock = blockUseCase.findBlockByName(name);
         return foundBlock.map(block -> ResponseEntity.status(HttpStatus.OK).body(block)).
                 orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 

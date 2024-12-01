@@ -2,6 +2,7 @@ package com.foliaco.bathrooms.infrastructure.aspect;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
@@ -23,5 +24,12 @@ public class LoggingAspect {
         String methodName = joinPoint.getSignature().getName();
         logger.info("Method {} executed successfully with result: {}", methodName, result);
     }
+
+    @AfterThrowing(pointcut = "execution(* com.foliaco.bathrooms.application.service.*.*(..))", throwing = "exception")
+    public void logAfterThrowingServiceMethod(JoinPoint joinPoint, RuntimeException exception){
+        String methodName = joinPoint.getSignature().getName();
+        logger.error("Method {} threw an exception: {}", methodName, exception.getMessage(), exception);
+    }
+
 
 }

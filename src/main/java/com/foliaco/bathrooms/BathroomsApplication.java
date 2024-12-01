@@ -1,5 +1,6 @@
 package com.foliaco.bathrooms;
 
+import com.foliaco.bathrooms.domain.enums.IncidentMessage;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

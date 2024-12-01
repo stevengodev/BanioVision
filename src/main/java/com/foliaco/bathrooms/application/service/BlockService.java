@@ -4,6 +4,7 @@ import com.foliaco.bathrooms.domain.dto.BlockDto;
 import com.foliaco.bathrooms.domain.dto.BlockRequestDto;
 import com.foliaco.bathrooms.domain.ports.in.BlockUseCase;
 import com.foliaco.bathrooms.domain.ports.out.BlockRepositoryPort;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cglib.core.Block;
@@ -14,14 +15,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service("blockService")
+@AllArgsConstructor
 public class BlockService implements BlockUseCase {
 
     private final BlockRepositoryPort blockRepositoryPort;
-
-    @Autowired
-    public BlockService(@Qualifier("blockRepositoryAdapter") BlockRepositoryPort blockRepositoryPort) {
-        this.blockRepositoryPort = blockRepositoryPort;
-    }
 
     @Transactional(readOnly = true)
     @Override

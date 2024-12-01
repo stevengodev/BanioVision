@@ -47,4 +47,8 @@ public class BathroomEntity {
 
     @OneToMany(mappedBy = "bathroomEntity", orphanRemoval = true)
     private List<CleaningScheduleEntity> cleaningScheduleEntities = new ArrayList<>();
+
+    @OneToMany(mappedBy = "bathroomEntity", orphanRemoval = true)
+    private List<BathroomIncidentEntity> bathroomIncidentEntities = new ArrayList<>();
+
 }

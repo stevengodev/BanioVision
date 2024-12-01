@@ -4,6 +4,7 @@ import com.foliaco.bathrooms.domain.dto.CleaningScheduleDto;
 import com.foliaco.bathrooms.domain.ports.in.CleaningScheduleUseCase;
 import com.foliaco.bathrooms.domain.ports.out.CleaningScheduleRepositoryPort;
 import com.foliaco.bathrooms.infrastructure.adapter.CleaningScheduleRepositoryAdapter;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,14 +14,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class CleaningScheduleService implements CleaningScheduleUseCase {
 
     private final CleaningScheduleRepositoryPort cleaningScheduleRepositoryPort;
 
-    @Autowired
-    public CleaningScheduleService(CleaningScheduleRepositoryAdapter cleaningScheduleRepositoryPort) {
-        this.cleaningScheduleRepositoryPort = cleaningScheduleRepositoryPort;
-    }
     @Override
     public List<CleaningScheduleDto> getAllCleaningSchedules() {
         return cleaningScheduleRepositoryPort.getAll();

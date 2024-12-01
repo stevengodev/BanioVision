@@ -3,6 +3,7 @@ package com.foliaco.bathrooms.application.service;
 import com.foliaco.bathrooms.domain.dto.MaintenanceSchedule;
 import com.foliaco.bathrooms.domain.ports.in.MaintenanceScheduleUseCase;
 import com.foliaco.bathrooms.domain.ports.out.MaintenanceScheduleRepositoryPort;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,14 +13,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class MaintenanceScheduleService implements MaintenanceScheduleUseCase {
 
     private final MaintenanceScheduleRepositoryPort maintenanceScheduleRepositoryPort;
-
-    @Autowired
-    public MaintenanceScheduleService(MaintenanceScheduleRepositoryPort maintenanceScheduleRepositoryPort) {
-        this.maintenanceScheduleRepositoryPort = maintenanceScheduleRepositoryPort;
-    }
 
     @Override
     public List<MaintenanceSchedule> getAllMaintenanceSchedules() {
