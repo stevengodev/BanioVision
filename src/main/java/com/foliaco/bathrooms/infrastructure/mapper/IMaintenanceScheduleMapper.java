@@ -1,6 +1,6 @@
 package com.foliaco.bathrooms.infrastructure.mapper;
 
-import com.foliaco.bathrooms.domain.dto.MaintenanceSchedule;
+import com.foliaco.bathrooms.domain.dto.MaintenanceScheduleDto;
 import com.foliaco.bathrooms.infrastructure.entity.MaintenanceScheduleEntity;
 import org.mapstruct.*;
 
@@ -15,13 +15,13 @@ public interface IMaintenanceScheduleMapper {
             @Mapping(source = "endDateTime", target = "endDateTime"),
             @Mapping(source = "bathroomId", target = "bathroomId")
     })
-    MaintenanceSchedule toMaintenanceSchedule(MaintenanceScheduleEntity maintenanceScheduleEntity);
+    MaintenanceScheduleDto toMaintenanceSchedule(MaintenanceScheduleEntity maintenanceScheduleEntity);
 
     @InheritInverseConfiguration
     @Mapping(target = "bathroomEntity", ignore = true)
-    MaintenanceScheduleEntity toMaintenanceScheduleEntity(MaintenanceSchedule maintenanceSchedule);
+    MaintenanceScheduleEntity toMaintenanceScheduleEntity(MaintenanceScheduleDto maintenanceSchedule);
 
-    List<MaintenanceSchedule> toMaintenanceScheduleList(List<MaintenanceScheduleEntity> maintenanceScheduleEntities);
+    List<MaintenanceScheduleDto> toMaintenanceScheduleList(List<MaintenanceScheduleEntity> maintenanceScheduleEntities);
 
 
 }

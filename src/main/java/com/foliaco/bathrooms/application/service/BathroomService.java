@@ -2,6 +2,8 @@ package com.foliaco.bathrooms.application.service;
 
 import com.foliaco.bathrooms.domain.dto.BathroomDto;
 import com.foliaco.bathrooms.domain.dto.BathroomIncidentDto;
+import com.foliaco.bathrooms.domain.dto.BathroomRequestDto;
+import com.foliaco.bathrooms.domain.dto.BathroomResponseDto;
 import com.foliaco.bathrooms.domain.ports.in.BathroomUseCase;
 import com.foliaco.bathrooms.domain.ports.out.BathroomRepositoryPort;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +24,13 @@ public class BathroomService implements BathroomUseCase {
     }
 
     @Override
-    public List<BathroomDto> getAllBathrooms() {
+    public List<BathroomResponseDto> getAllBathrooms() {
         return bathroomRepositoryPort.getAll();
     }
 
     @Override
-    public BathroomDto createBathroom(BathroomDto newBathroom) {
-        return bathroomRepositoryPort.save(newBathroom);
+    public BathroomDto createBathroom(BathroomRequestDto bathroomRequest) {
+        return bathroomRepositoryPort.save(bathroomRequest);
     }
 
     @Override

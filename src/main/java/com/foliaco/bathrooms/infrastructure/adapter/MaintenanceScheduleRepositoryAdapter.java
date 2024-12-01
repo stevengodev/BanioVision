@@ -1,6 +1,6 @@
 package com.foliaco.bathrooms.infrastructure.adapter;
 
-import com.foliaco.bathrooms.domain.dto.MaintenanceSchedule;
+import com.foliaco.bathrooms.domain.dto.MaintenanceScheduleDto;
 import com.foliaco.bathrooms.domain.ports.out.MaintenanceScheduleRepositoryPort;
 import com.foliaco.bathrooms.infrastructure.entity.MaintenanceScheduleEntity;
 import com.foliaco.bathrooms.infrastructure.mapper.IMaintenanceScheduleMapper;
@@ -27,12 +27,12 @@ public class MaintenanceScheduleRepositoryAdapter implements MaintenanceSchedule
     }
 
     @Override
-    public List<MaintenanceSchedule> getAll() {
+    public List<MaintenanceScheduleDto> getAll() {
         return maintenanceScheduleMapper.toMaintenanceScheduleList(maintenanceScheduleRepository.findAll());
     }
 
     @Override
-    public MaintenanceSchedule save(MaintenanceSchedule maintenanceSchedule) {
+    public MaintenanceScheduleDto save(MaintenanceScheduleDto maintenanceSchedule) {
         MaintenanceScheduleEntity maintenanceScheduleEntity = maintenanceScheduleMapper
                 .toMaintenanceScheduleEntity(maintenanceSchedule);
 
@@ -41,18 +41,24 @@ public class MaintenanceScheduleRepositoryAdapter implements MaintenanceSchedule
     }
 
     @Override
-    public Optional<MaintenanceSchedule> findById(Integer id) {
+    public Optional<MaintenanceScheduleDto> findById(Integer id) {
         return maintenanceScheduleRepository.findById(id)
                 .map(maintenanceScheduleMapper::toMaintenanceSchedule);
     }
 
     @Override
-    public List<MaintenanceSchedule> findByBathroomIdAndBetweenDateTimes(Integer bathroomId,
-                                                                         LocalDateTime start,
-                                                                         LocalDateTime end) {
+    public List<MaintenanceScheduleDto> findByBathroomIdByStartDateTimeAfter(Integer bathroomId,
+                                                                            LocalDateTime start) {
 
         return maintenanceScheduleMapper.toMaintenanceScheduleList(
-                maintenanceScheduleRepository.findByBathroomIdAndBetweenDateTimes(bathroomId, start, end)
+                maintenanceScheduleRepository.findByBathroomIdAndStartDateTimeAfter(bathroomId, start)
+        );
+    }
+
+    @Override
+    public List<MaintenanceScheduleDto> findAllByStartDateTimeAfter(LocalDateTime start) {
+        return maintenanceScheduleMapper.toMaintenanceScheduleList(
+                maintenanceScheduleRepository.findMaintenanceScheduleEntitiesByStartDateTimeAfter(start)
         );
     }
 

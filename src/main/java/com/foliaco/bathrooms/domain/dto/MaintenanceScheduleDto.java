@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Setter
 @Getter
 @ToString
-public class MaintenanceSchedule {
+public class MaintenanceScheduleDto {
 
     private Integer id;
     private LocalDateTime startDateTime;

@@ -1,12 +1,12 @@
 package com.foliaco.bathrooms.application.service;
 
-import com.foliaco.bathrooms.domain.dto.MaintenanceSchedule;
+import com.foliaco.bathrooms.domain.dto.MaintenanceScheduleDto;
 import com.foliaco.bathrooms.domain.ports.in.MaintenanceScheduleUseCase;
 import com.foliaco.bathrooms.domain.ports.out.MaintenanceScheduleRepositoryPort;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
@@ -19,19 +19,19 @@ public class MaintenanceScheduleService implements MaintenanceScheduleUseCase {
     private final MaintenanceScheduleRepositoryPort maintenanceScheduleRepositoryPort;
 
     @Override
-    public List<MaintenanceSchedule> getAllMaintenanceSchedules() {
+    public List<MaintenanceScheduleDto> getAllMaintenanceSchedules() {
         return maintenanceScheduleRepositoryPort.getAll();
     }
 
     @Override
-    public MaintenanceSchedule createMaintenanceSchedule(MaintenanceSchedule newCleaningSchedule) {
+    public MaintenanceScheduleDto createMaintenanceSchedule(MaintenanceScheduleDto newCleaningSchedule) {
         return maintenanceScheduleRepositoryPort.save(newCleaningSchedule);
     }
 
     @Override
-    public Optional<MaintenanceSchedule> updateMaintenanceSchedule(MaintenanceSchedule cleaningSchedule) {
+    public Optional<MaintenanceScheduleDto> updateMaintenanceSchedule(MaintenanceScheduleDto cleaningSchedule) {
 
-        Optional<MaintenanceSchedule> maintenanceScheduleFound = maintenanceScheduleRepositoryPort.findById(
+        Optional<MaintenanceScheduleDto> maintenanceScheduleFound = maintenanceScheduleRepositoryPort.findById(
                 cleaningSchedule.getId()
         );
 
@@ -41,12 +41,13 @@ public class MaintenanceScheduleService implements MaintenanceScheduleUseCase {
     }
 
     @Override
-    public List<MaintenanceSchedule> getTodayMaintenanceSchedulesByBathroomId(Integer bathroomId) {
+    public List<MaintenanceScheduleDto> getMaintenanceSchedulesByBathroomIdFromDate(Integer bathroomId, LocalDateTime datetime) {
+        return maintenanceScheduleRepositoryPort.findByBathroomIdByStartDateTimeAfter(bathroomId, datetime);
+    }
 
-        LocalDateTime startOfDay = LocalDateTime.now().with(LocalTime.MIN);
-        LocalDateTime endOfDay = LocalDateTime.now().with(LocalTime.MAX);
-
-        return maintenanceScheduleRepositoryPort.findByBathroomIdAndBetweenDateTimes(bathroomId, startOfDay, endOfDay);
+    @Override
+    public List<MaintenanceScheduleDto> getMaintenanceSchedulesFromDate(LocalDateTime date) {
+        return maintenanceScheduleRepositoryPort.findAllByStartDateTimeAfter(date);
     }
 
     @Override

@@ -1,6 +1,8 @@
 package com.foliaco.bathrooms.infrastructure.mapper;
 
 import com.foliaco.bathrooms.domain.dto.BathroomDto;
+import com.foliaco.bathrooms.domain.dto.BathroomRequestDto;
+import com.foliaco.bathrooms.domain.dto.BathroomResponseDto;
 import com.foliaco.bathrooms.infrastructure.entity.BathroomEntity;
 import org.mapstruct.*;
 
@@ -23,5 +25,21 @@ public interface IBathroomMapper {
     @Mapping(target = "cleaningScheduleEntities", ignore = true)
     BathroomEntity toBathroomEntity(BathroomDto bathroom);
 
-    List<BathroomDto> toBathrooms(List<BathroomEntity> bathroomEntities);
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "cleaningScheduleEntities", ignore = true)
+    @Mapping(target = "blockEntity", ignore = true)
+    @Mapping(target = "bathroomIncidentEntities", ignore = true)
+    BathroomEntity toBathroomEntity(BathroomRequestDto bathroom);
+
+    @Mappings({
+            @Mapping(source = "id", target = "id"),
+            @Mapping(source = "status", target = "status"),
+            @Mapping(source = "gender", target = "gender"),
+            @Mapping(source = "blockEntity.name", target = "nameBlock"),
+            @Mapping(source = "floor", target = "floor")
+    })
+    BathroomResponseDto toBathroomResponse(BathroomEntity bathroomEntity);
+
+    List<BathroomResponseDto> toBathrooms(List<BathroomEntity> bathroomEntities);
+
 }

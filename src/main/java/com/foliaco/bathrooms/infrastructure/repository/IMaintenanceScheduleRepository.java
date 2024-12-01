@@ -13,10 +13,8 @@ public interface IMaintenanceScheduleRepository extends JpaRepository<Maintenanc
     @Query("SELECT ms FROM MaintenanceScheduleEntity ms WHERE ms.bathroomId = :bathroomId")
     List<MaintenanceScheduleEntity> findByBathroomId(Integer bathroomId);
 
-    @Query("SELECT ms FROM MaintenanceScheduleEntity ms WHERE ms.bathroomId = :banoId " +
-            "AND ms.startDateTime BETWEEN :startOfDay AND :endOfDay")
-    List<MaintenanceScheduleEntity> findByBathroomIdAndBetweenDateTimes(@Param("banoId") Integer banoId,
-                                                                        @Param("startOfDay") LocalDateTime startOfDay,
-                                                                        @Param("endOfDay") LocalDateTime endOfDay);
 
+    List<MaintenanceScheduleEntity> findByBathroomIdAndStartDateTimeAfter(Integer id, LocalDateTime date);
+
+    List<MaintenanceScheduleEntity> findMaintenanceScheduleEntitiesByStartDateTimeAfter(LocalDateTime startOfDay);
 }

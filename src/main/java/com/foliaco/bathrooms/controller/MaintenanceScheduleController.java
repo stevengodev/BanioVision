@@ -1,15 +1,14 @@
 package com.foliaco.bathrooms.controller;
 
-import com.foliaco.bathrooms.application.service.MaintenanceScheduleService;
-import com.foliaco.bathrooms.domain.dto.MaintenanceSchedule;
+import com.foliaco.bathrooms.domain.dto.MaintenanceScheduleDto;
 import com.foliaco.bathrooms.domain.ports.in.MaintenanceScheduleUseCase;
 import com.foliaco.bathrooms.infrastructure.exception.NotFoundException;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,33 +20,33 @@ public class MaintenanceScheduleController {
     private final MaintenanceScheduleUseCase maintenanceScheduleUseCase;
 
     @GetMapping("/")
-    public ResponseEntity<List<MaintenanceSchedule>> getAll(){
+    public ResponseEntity<List<MaintenanceScheduleDto>> getAll(){
         return ResponseEntity.ok(maintenanceScheduleUseCase.getAllMaintenanceSchedules());
     }
 
+    @GetMapping("/upcoming")
+    public ResponseEntity<List<MaintenanceScheduleDto>> getAllUpcoming(){
+        LocalDateTime now = LocalDateTime.now();
+        return ResponseEntity.ok(maintenanceScheduleUseCase.getMaintenanceSchedulesFromDate(now));
+    }
+
     @GetMapping("/bathroom/{id}")
-    public ResponseEntity<List<MaintenanceSchedule>> getTodayMaintenanceSchedulesByBathroomId(@PathVariable Integer id){
-
-        List<MaintenanceSchedule> maintenanceSchedules = maintenanceScheduleUseCase.getTodayMaintenanceSchedulesByBathroomId(id);
-
-        if (maintenanceSchedules.isEmpty()){
-             throw new NotFoundException("Horarios de mantenimiento para hoy no encontrados");
-        }
-
+    public ResponseEntity<List<MaintenanceScheduleDto>> getMaintenanceSchedulesByBathroomIdFromDate(@PathVariable Integer id){
+        LocalDateTime now = LocalDateTime.now();
+        List<MaintenanceScheduleDto> maintenanceSchedules = maintenanceScheduleUseCase.getMaintenanceSchedulesByBathroomIdFromDate(id, now);
         return ResponseEntity.ok(maintenanceSchedules);
-
     }
 
     @PostMapping("/")
-    public ResponseEntity<MaintenanceSchedule> save(@RequestBody MaintenanceSchedule newMaintenanceSchedule){
+    public ResponseEntity<MaintenanceScheduleDto> save(@RequestBody MaintenanceScheduleDto newMaintenanceSchedule){
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(maintenanceScheduleUseCase.createMaintenanceSchedule(newMaintenanceSchedule));
     }
 
     @PutMapping("/")
-    public ResponseEntity<MaintenanceSchedule> update(@RequestBody MaintenanceSchedule maintenanceSchedule){
+    public ResponseEntity<MaintenanceScheduleDto> update(@RequestBody MaintenanceScheduleDto maintenanceSchedule){
 
-        Optional<MaintenanceSchedule> updateMaintenanceSchedule = maintenanceScheduleUseCase.updateMaintenanceSchedule(
+        Optional<MaintenanceScheduleDto> updateMaintenanceSchedule = maintenanceScheduleUseCase.updateMaintenanceSchedule(
                 maintenanceSchedule
         );
 

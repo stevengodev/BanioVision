@@ -1,9 +1,6 @@
 package com.foliaco.bathrooms.controller;
 
-import com.foliaco.bathrooms.domain.dto.BathroomDto;
-import com.foliaco.bathrooms.domain.dto.BathroomIncidentDto;
-import com.foliaco.bathrooms.domain.dto.IncidentDto;
-import com.foliaco.bathrooms.domain.dto.IncidentRequestDto;
+import com.foliaco.bathrooms.domain.dto.*;
 import com.foliaco.bathrooms.domain.enums.IncidentMessage;
 import com.foliaco.bathrooms.domain.ports.in.BathroomIncidentUseCase;
 import com.foliaco.bathrooms.domain.ports.in.BathroomUseCase;
@@ -26,7 +23,7 @@ public class BathroomController {
     private final IncidentUseCase incidentUseCase;
 
     @GetMapping("/")
-    public ResponseEntity<List<BathroomDto>> getAll(){
+    public ResponseEntity<List<BathroomResponseDto>> getAll(){
         return ResponseEntity.ok(bathroomUseCase.getAllBathrooms());
     }
 
@@ -41,8 +38,8 @@ public class BathroomController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<BathroomDto> save(@RequestBody BathroomDto newBathroom){
-        return ResponseEntity.status(HttpStatus.CREATED).body(bathroomUseCase.createBathroom(newBathroom));
+    public ResponseEntity<BathroomDto> save(@RequestBody BathroomRequestDto bathroomRequest){
+        return ResponseEntity.status(HttpStatus.CREATED).body(bathroomUseCase.createBathroom(bathroomRequest));
     }
 
     @PutMapping("/")
