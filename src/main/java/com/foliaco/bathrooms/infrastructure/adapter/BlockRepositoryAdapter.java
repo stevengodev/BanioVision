@@ -1,7 +1,6 @@
 package com.foliaco.bathrooms.infrastructure.adapter;
 
 import com.foliaco.bathrooms.domain.dto.BlockDto;
-import com.foliaco.bathrooms.domain.dto.BlockRequestDto;
 import com.foliaco.bathrooms.domain.ports.out.BlockRepositoryPort;
 import com.foliaco.bathrooms.infrastructure.entity.BlockEntity;
 import com.foliaco.bathrooms.infrastructure.mapper.IBlockMapper;

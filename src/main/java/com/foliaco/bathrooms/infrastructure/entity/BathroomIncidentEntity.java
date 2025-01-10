@@ -1,6 +1,5 @@
 package com.foliaco.bathrooms.infrastructure.entity;
 
-import com.foliaco.bathrooms.infrastructure.listeners.CustomAuditListener;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

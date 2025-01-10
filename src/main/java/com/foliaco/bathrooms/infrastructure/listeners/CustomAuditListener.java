@@ -8,7 +8,7 @@ import jakarta.persistence.PreRemove;
 import jakarta.persistence.PreUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.data.domain.AuditorAware;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -18,12 +18,9 @@ public class CustomAuditListener {
 
     private final AudityRepositoryPort audityRepositoryPort;
 
-    private final AuditorAware<String> auditorAware;
-
     @Autowired
-    public CustomAuditListener(@Lazy AudityRepositoryPort audityRepositoryPort, AuditorAware<String> auditorAware) {
+    public CustomAuditListener(@Lazy AudityRepositoryPort audityRepositoryPort) {
         this.audityRepositoryPort = audityRepositoryPort;
-        this.auditorAware = auditorAware;
     }
 
     @PrePersist
@@ -41,15 +38,16 @@ public class CustomAuditListener {
         registerAudit(entity, "DELETED");
     }
 
-
     private void registerAudit(Object entity, String action) {
+        String nameClass = AuditEntityNameResolver.getCustomEntityName(entity.getClass());
+        String user = SecurityContextHolder.getContext().getAuthentication().getName();
+
         AuditEntity auditEntity = new AuditEntity();
-        auditEntity.setEntityName(AuditEntityNameResolver.getCustomEntityName(entity.getClass()));
+        auditEntity.setEntityName(nameClass);
         auditEntity.setDate(LocalDateTime.now());
         auditEntity.setAction(action);
-        auditEntity.setUser("user-test");
-        //String user = auditorAware.getCurrentAuditor().orElse(null);
-        //String user = SecurityContextHolder.getContext().getAuthentication().getName();
+        auditEntity.setUser(user);
+
         audityRepositoryPort.save(auditEntity);
     }
 

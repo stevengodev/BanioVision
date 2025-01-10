@@ -2,7 +2,6 @@ package com.foliaco.bathrooms.domain.ports.in;
 
 import com.foliaco.bathrooms.domain.dto.MaintenanceScheduleDto;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -15,5 +14,4 @@ public interface MaintenanceScheduleUseCase {
     List<MaintenanceScheduleDto> getMaintenanceSchedulesByBathroomIdAndFromDate(Integer bathroomId, LocalDateTime datetime);
     List<MaintenanceScheduleDto> getMaintenanceSchedulesFromDate(LocalDateTime date);
     boolean deleteMaintenanceSchedule(Integer id);
-
 }

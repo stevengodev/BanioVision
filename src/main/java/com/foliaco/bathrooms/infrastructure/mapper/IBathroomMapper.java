@@ -6,18 +6,14 @@ import com.foliaco.bathrooms.domain.dto.BathroomResponseDto;
 import com.foliaco.bathrooms.infrastructure.entity.BathroomEntity;
 import org.mapstruct.*;
 
-import java.util.List;
-
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface IBathroomMapper {
 
-    @Mappings({
-            @Mapping(source = "id", target = "id"),
-            @Mapping(source = "status", target = "status"),
-            @Mapping(source = "gender", target = "gender"),
-            @Mapping(source = "blockId", target = "blockId"),
-            @Mapping(source = "floor", target = "floor")
-    })
+    @Mapping(source = "id", target = "id")
+    @Mapping(source = "status", target = "status")
+    @Mapping(source = "gender", target = "gender")
+    @Mapping(source = "blockId", target = "blockId")
+    @Mapping(source = "floor", target = "floor")
     BathroomDto toBathroom(BathroomEntity bathroomEntity);
 
     @InheritInverseConfiguration
@@ -31,15 +27,11 @@ public interface IBathroomMapper {
     @Mapping(target = "bathroomIncidentEntities", ignore = true)
     BathroomEntity toBathroomEntity(BathroomRequestDto bathroom);
 
-    @Mappings({
-            @Mapping(source = "id", target = "id"),
-            @Mapping(source = "status", target = "status"),
-            @Mapping(source = "gender", target = "gender"),
-            @Mapping(source = "blockEntity.name", target = "nameBlock"),
-            @Mapping(source = "floor", target = "floor")
-    })
+    @Mapping(source = "id", target = "id")
+    @Mapping(source = "status", target = "status")
+    @Mapping(source = "gender", target = "gender")
+    @Mapping(source = "blockEntity.name", target = "nameBlock")
+    @Mapping(source = "floor", target = "floor")
     BathroomResponseDto toBathroomResponse(BathroomEntity bathroomEntity);
-
-    List<BathroomResponseDto> toBathrooms(List<BathroomEntity> bathroomEntities);
 
 }

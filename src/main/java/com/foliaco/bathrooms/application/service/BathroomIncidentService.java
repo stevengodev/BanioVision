@@ -2,8 +2,6 @@ package com.foliaco.bathrooms.application.service;
 
 import com.foliaco.bathrooms.domain.dto.BathroomIncidentDto;
 import com.foliaco.bathrooms.domain.dto.BathroomIncidentResponseDto;
-import com.foliaco.bathrooms.domain.enums.BathroomStatus;
-import com.foliaco.bathrooms.domain.enums.Gender;
 import com.foliaco.bathrooms.domain.ports.in.BathroomIncidentUseCase;
 import com.foliaco.bathrooms.domain.ports.out.BathroomIncidentRepositoryPort;
 import lombok.AllArgsConstructor;

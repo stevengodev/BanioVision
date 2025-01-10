@@ -3,6 +3,7 @@ package com.foliaco.bathrooms.controller;
 import com.foliaco.bathrooms.application.service.BlockService;
 import com.foliaco.bathrooms.domain.dto.BlockDto;
 import com.foliaco.bathrooms.domain.dto.BlockRequestDto;
+import com.foliaco.bathrooms.infrastructure.controller.BlockController;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class AuditRepositoryAdapter implements AudityRepositoryPort {
 
-    IAudityRepository audityRepository;
+    private IAudityRepository audityRepository;
 
     @Autowired
     public AuditRepositoryAdapter(IAudityRepository audityRepository) {

@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Repository
 public class BathroomRepositoryAdapter implements BathroomRepositoryPort {
@@ -31,7 +30,7 @@ public class BathroomRepositoryAdapter implements BathroomRepositoryPort {
     public List<BathroomResponseDto> getAll() {
         return bathroomRepository.findAll().stream()
                 .map(bathroomMapper::toBathroomResponse)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.foliaco.bathrooms.controller;
+package com.foliaco.bathrooms.infrastructure.controller;
 
 import com.foliaco.bathrooms.application.service.BlockService;
 import com.foliaco.bathrooms.domain.dto.BlockDto;

@@ -1,4 +1,4 @@
-package com.foliaco.bathrooms.controller;
+package com.foliaco.bathrooms.infrastructure.controller;
 
 import com.foliaco.bathrooms.domain.dto.*;
 import com.foliaco.bathrooms.domain.enums.IncidentMessage;
@@ -6,6 +6,7 @@ import com.foliaco.bathrooms.domain.ports.in.BathroomIncidentUseCase;
 import com.foliaco.bathrooms.domain.ports.in.BathroomUseCase;
 import com.foliaco.bathrooms.domain.ports.in.IncidentUseCase;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("api/bathrooms")
 @AllArgsConstructor
+@Slf4j
 public class BathroomController {
 
     private final BathroomUseCase bathroomUseCase;
@@ -64,12 +66,13 @@ public class BathroomController {
         BathroomIncidentDto bathroomIncidentDto = new BathroomIncidentDto();
 
         if (incidentDto.getProblem() == IncidentMessage.OTRO && incidentDto.getComment() != null ){
-            //Crear un nuevo incidente
             IncidentDto incident = incidentUseCase.createIncident(incidentDto);
+            log.info("id del incidente nuevo: {}", incident.getId());
             bathroomIncidentDto.setIdIncident(incident.getId());
+        }else{
+            bathroomIncidentDto.setIdIncident( incidentDto.getId() );
         }
 
-        bathroomIncidentDto.setIdIncident( incidentDto.getId() );
         bathroomIncidentDto.setIdBathroom(idBathroom);
         bathroomIncidentDto.setDate(LocalDate.now());
         bathroomIncidentDto.setStatus("PENDIENTE");
@@ -78,5 +81,14 @@ public class BathroomController {
         return ResponseEntity.status(HttpStatus.CREATED).body(bathroomIncidentSaved);
     }
 
+    @PutMapping("/{idBathroom}/solve-incident")
+    public ResponseEntity<BathroomIncidentDto> solveIncident(@PathVariable Integer idBathroom,
+                                                              @RequestBody BathroomIncidentDto bathroomIncidentDto){
+
+        Optional<BathroomIncidentDto> bathroomIncident = bathroomIncidentUseCase.updateBathroomIncident(bathroomIncidentDto);
+
+        return bathroomIncident.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
+    }
 
 }

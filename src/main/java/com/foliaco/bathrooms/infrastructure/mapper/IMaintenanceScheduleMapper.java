@@ -9,12 +9,10 @@ import java.util.List;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface IMaintenanceScheduleMapper {
 
-    @Mappings({
-            @Mapping(source = "id", target = "id"),
-            @Mapping(source = "startDateTime", target = "startDateTime"),
-            @Mapping(source = "endDateTime", target = "endDateTime"),
-            @Mapping(source = "bathroomId", target = "bathroomId")
-    })
+    @Mapping(source = "id", target = "id")
+    @Mapping(source = "startDateTime", target = "startDateTime")
+    @Mapping(source = "endDateTime", target = "endDateTime")
+    @Mapping(source = "bathroomId", target = "bathroomId")
     MaintenanceScheduleDto toMaintenanceSchedule(MaintenanceScheduleEntity maintenanceScheduleEntity);
 
     @InheritInverseConfiguration

@@ -8,12 +8,10 @@ import org.mapstruct.*;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface IBathroomIncidentMapper {
 
-    @Mappings({
-            @Mapping(source = "id.bathroomId", target = "idBathroom"),
-            @Mapping(source = "id.incidentId", target = "idIncident"),
-            @Mapping(source = "date", target = "date"),
-            @Mapping(source = "status", target = "status")
-    })
+    @Mapping(source = "id.bathroomId", target = "idBathroom")
+    @Mapping(source = "id.incidentId", target = "idIncident")
+    @Mapping(source = "date", target = "date")
+    @Mapping(source = "status", target = "status")
     BathroomIncidentDto toBathroomIncidentDto(BathroomIncidentEntity bathroomIncidentEntity);
 
     @InheritInverseConfiguration
@@ -21,15 +19,13 @@ public interface IBathroomIncidentMapper {
     @Mapping(target = "bathroomEntity", ignore = true)
     BathroomIncidentEntity toBathroomIncidentEntity(BathroomIncidentDto bathroomIncidentDto);
 
-    @Mappings({
-            @Mapping(source = "bathroomEntity.gender", target = "genderBathroom"),
-            @Mapping(source = "bathroomEntity.blockEntity.name", target = "nameBlock"),
-            @Mapping(source = "bathroomEntity.floor", target = "floor"),
-            @Mapping(source = "date", target = "date"),
-            @Mapping(source = "status", target = "status"),
-            @Mapping(source = "incidentEntity.problem", target = "problem"),
-            @Mapping(source = "incidentEntity.comment", target = "comment")
-    })
+    @Mapping(source = "bathroomEntity.gender", target = "genderBathroom")
+    @Mapping(source = "bathroomEntity.blockEntity.name", target = "nameBlock")
+    @Mapping(source = "bathroomEntity.floor", target = "floor")
+    @Mapping(source = "date", target = "date")
+    @Mapping(source = "status", target = "status")
+    @Mapping(source = "incidentEntity.problem", target = "problem")
+    @Mapping(source = "incidentEntity.comment", target = "comment")
     BathroomIncidentResponseDto toBathroomIncidentResponseDto(BathroomIncidentEntity bathroomIncidentEntity);
 
 }

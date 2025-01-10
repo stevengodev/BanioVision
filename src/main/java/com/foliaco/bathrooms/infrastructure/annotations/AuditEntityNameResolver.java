@@ -1,6 +1,5 @@
 package com.foliaco.bathrooms.infrastructure.annotations;
 
-import java.lang.annotation.Annotation;
 
 public class AuditEntityNameResolver {
 

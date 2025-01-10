@@ -1,4 +1,4 @@
-package com.foliaco.bathrooms.controller;
+package com.foliaco.bathrooms.infrastructure.controller;
 
 import com.foliaco.bathrooms.domain.dto.CleaningScheduleDto;
 import com.foliaco.bathrooms.domain.ports.in.CleaningScheduleUseCase;

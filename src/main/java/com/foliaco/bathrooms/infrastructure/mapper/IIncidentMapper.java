@@ -7,11 +7,9 @@ import org.mapstruct.*;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface IIncidentMapper {
 
-    @Mappings({
-            @Mapping(source = "id", target = "id"),
-            @Mapping(source = "problem", target = "problem"),
-            @Mapping(source = "comment", target = "comment")
-    })
+    @Mapping(source = "id", target = "id")
+    @Mapping(source = "problem", target = "problem")
+    @Mapping(source = "comment", target = "comment")
     IncidentDto toIncidentDto(IncidentEntity incidentEntity);
 
     @InheritInverseConfiguration
