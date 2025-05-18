@@ -19,14 +19,11 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     private final JwtAuthenticationProvider jwtAuthenticationProvider;
 
-    private List<String> urlsToSkip = List.of("/api/auth/sign-in",
+    private List<String> urlsToSkip = List.of("/api/auth/",
             "/swagger-ui.html", "/swagger-ui", "/api-docs");
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        System.out.println("en esta peticion se rompe");
-        System.out.println(request.getRequestURI());
-
         // Si la URL de la solicitud coincide con alguna de las URLs en la lista urlsToSkip, el filtro no se aplicará a esa solicitud,
         return urlsToSkip.stream().anyMatch(url -> request.getRequestURI().contains(url));
     }
@@ -34,8 +31,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
-                                    HttpServletResponse response,
-                                    FilterChain filterChain) throws ServletException, IOException {
+                                 HttpServletResponse response,
+                                 FilterChain filterChain) throws ServletException, IOException {
 
         String header = request.getHeader(HttpHeaders.AUTHORIZATION);
 

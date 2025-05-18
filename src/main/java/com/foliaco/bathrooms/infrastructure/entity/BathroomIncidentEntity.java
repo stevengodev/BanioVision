@@ -23,10 +23,12 @@ public class BathroomIncidentEntity {
     @Column(name = "estado")
     private String status;
 
+    @MapsId("bathroomId")
     @ManyToOne
     @JoinColumn(name = "bano_id",insertable = false, updatable = false)
     private BathroomEntity bathroomEntity;
 
+    @MapsId("incidentId")
     @ManyToOne
     @JoinColumn(name = "incidente_id", insertable = false, updatable = false)
     private IncidentEntity incidentEntity;

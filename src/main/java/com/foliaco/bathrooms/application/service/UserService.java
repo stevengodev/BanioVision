@@ -1,6 +1,7 @@
 package com.foliaco.bathrooms.application.service;
 
 import com.foliaco.bathrooms.application.validator.EmailValidator;
+import com.foliaco.bathrooms.domain.dto.BlockDto;
 import com.foliaco.bathrooms.domain.dto.UserDto;
 import com.foliaco.bathrooms.domain.enums.Role;
 import com.foliaco.bathrooms.domain.ports.in.UserUseCase;
@@ -44,7 +45,6 @@ public class UserService implements UserUseCase {
             throw new UserExistsException();
         }
 
-        //String passwordGenerated = generateRandomPassword(10);
         newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
         newUser.setRole(Role.USER);
         userRepositoryPort.save(newUser);
@@ -54,21 +54,8 @@ public class UserService implements UserUseCase {
 
     @Override
     public Optional<UserDto> updateUser(UserDto userDto) {
-        return Optional.empty();
+        Optional<UserDto> foundUser = userRepositoryPort.getByEmail(userDto.getEmail());
+        return foundUser.isEmpty() ? Optional.empty() : Optional.of(userRepositoryPort.save(userDto));
     }
 
-    private String generateRandomPassword(int length)
-    {
-        final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-        SecureRandom random = new SecureRandom();
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < length; i++) {
-            int randomIndex = random.nextInt(chars.length());
-            sb.append(chars.charAt(randomIndex));
-        }
-
-        return sb.toString();
-    }
 }

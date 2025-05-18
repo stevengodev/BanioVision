@@ -1,16 +1,18 @@
 package com.foliaco.bathrooms.controller;
 
+import com.foliaco.bathrooms.WithMockJwt;
 import com.foliaco.bathrooms.application.service.BlockService;
 import com.foliaco.bathrooms.domain.dto.BlockDto;
 import com.foliaco.bathrooms.domain.dto.BlockRequestDto;
 import com.foliaco.bathrooms.infrastructure.controller.BlockController;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -21,26 +23,29 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ExtendWith(SpringExtension.class)
+@ExtendWith(MockitoExtension.class)
 @WebMvcTest(value = BlockController.class)
+@AutoConfigureMockMvc(addFilters = false)
 class BlockControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean(name = "blockService")
+    @MockBean
     private BlockService blockService;
 
     @Test
-    void getAll_whenGetBlocks_thenReturnAllBlocks() throws Exception {
+    @WithMockJwt(username = "mockUser", roles = {"ADMIN"})
+    void whenGetBlocks_thenReturnAllBlocks() throws Exception {
         when(blockService.getAllBlocks()).thenReturn(List.of(new BlockDto(1, "Bloque A", 2)));
 
-        mockMvc.perform(get("/api/blocks/").contentType(MediaType.APPLICATION_JSON))
-                                .andExpect(status().isOk())
-
-                                .andExpect(jsonPath("$[0].id").value(1))
-        .andExpect(jsonPath("$[0].name").value("Bloque A"))
-        .andExpect(jsonPath("$[0].numberOfFloors").value(2));
+        mockMvc.perform(get("/api/blocks/")
+                        .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].id").value(1))
+                .andExpect(jsonPath("$[0].name").value("Bloque A"))
+                .andExpect(jsonPath("$[0].numberOfFloors").value(2));
 
         verify(blockService, times(1)).getAllBlocks();
     }
@@ -55,7 +60,9 @@ class BlockControllerTest {
 
         when(blockService.findBlockByName(anyString())).thenReturn(Optional.of(blockDto));
 
-        mockMvc.perform(get("/api/blocks/name/BloqueA").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/api/blocks/name/BloqueA")
+                        .contentType(MediaType.APPLICATION_JSON)
+                )
                 .andExpect(jsonPath("$.name").value("Bloque A"))
                 .andExpect(jsonPath("$.numberOfFloors").value(2))
                 .andExpect(status().isOk());
@@ -73,7 +80,7 @@ class BlockControllerTest {
         when(blockService.createBlock(any(BlockRequestDto.class))).thenReturn(blockDto);
 
         mockMvc.perform(post("/api/blocks/").contentType(MediaType.APPLICATION_JSON)
-                                .content("""
+                        .content("""
                                         {
                                           "id": 1,
                                           "name": "Bloque A",
@@ -97,7 +104,7 @@ class BlockControllerTest {
         when(blockService.updateBlock(any(BlockDto.class))).thenReturn(Optional.of(blockDto));
 
         mockMvc.perform(put("/api/blocks/").contentType(MediaType.APPLICATION_JSON)
-                                .content("""
+                        .content("""
                                         {
                                           "id": 1,
                                           "name": "Bloque B",
@@ -114,7 +121,9 @@ class BlockControllerTest {
     void givenId_whenDeleteBlock_thenReturnOk() throws Exception {
         when(blockService.deleteBlock(anyInt())).thenReturn(true);
 
-        mockMvc.perform(delete("/api/blocks/{id}", 1).contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(delete("/api/blocks/{id}", 1)
+                        .contentType(MediaType.APPLICATION_JSON)
+                )
                 .andExpect(status().isOk());
 
         verify(blockService, times(1)).deleteBlock(anyInt());

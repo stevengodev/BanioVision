@@ -1,14 +1,12 @@
 package com.foliaco.bathrooms.infrastructure.controller;
 
-import com.foliaco.bathrooms.application.service.BlockService;
 import com.foliaco.bathrooms.domain.dto.BlockDto;
 import com.foliaco.bathrooms.domain.dto.BlockRequestDto;
 import com.foliaco.bathrooms.domain.ports.in.BlockUseCase;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

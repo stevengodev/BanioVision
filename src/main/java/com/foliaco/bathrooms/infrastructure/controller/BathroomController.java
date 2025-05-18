@@ -6,7 +6,6 @@ import com.foliaco.bathrooms.domain.ports.in.BathroomIncidentUseCase;
 import com.foliaco.bathrooms.domain.ports.in.BathroomUseCase;
 import com.foliaco.bathrooms.domain.ports.in.IncidentUseCase;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +16,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("api/bathrooms")
 @AllArgsConstructor
-@Slf4j
 public class BathroomController {
 
     private final BathroomUseCase bathroomUseCase;
@@ -67,7 +65,6 @@ public class BathroomController {
 
         if (incidentDto.getProblem() == IncidentMessage.OTRO && incidentDto.getComment() != null ){
             IncidentDto incident = incidentUseCase.createIncident(incidentDto);
-            log.info("id del incidente nuevo: {}", incident.getId());
             bathroomIncidentDto.setIdIncident(incident.getId());
         }else{
             bathroomIncidentDto.setIdIncident( incidentDto.getId() );
