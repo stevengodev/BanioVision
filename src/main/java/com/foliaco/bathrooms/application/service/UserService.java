@@ -1,7 +1,6 @@
 package com.foliaco.bathrooms.application.service;
 
 import com.foliaco.bathrooms.application.validator.EmailValidator;
-import com.foliaco.bathrooms.domain.dto.BlockDto;
 import com.foliaco.bathrooms.domain.dto.UserDto;
 import com.foliaco.bathrooms.domain.enums.Role;
 import com.foliaco.bathrooms.domain.ports.in.UserUseCase;
@@ -12,7 +11,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.security.SecureRandom;
 import java.util.List;
 import java.util.Optional;
 

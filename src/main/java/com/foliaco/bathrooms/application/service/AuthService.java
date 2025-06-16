@@ -43,5 +43,6 @@ public class AuthService implements AuthUseCase {
     @Override
     public JwtResponseDto signOut(String jwt) {
         String[] authElements = jwt.split(" ");
-        return new JwtResponseDto(jwtAuthenticationProvider.deleteToken(authElements[1]));    }
+        return new JwtResponseDto(jwtAuthenticationProvider.deleteToken(authElements[1]));
+    }
 }
